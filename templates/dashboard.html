@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>My Businesses</h2>
+<a href="{{ url_for('add_business') }}" class="btn btn-success mb-3">Add Business</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for biz in businesses %}
+        <tr>
+            <td>{{ biz.name }}</td>
+            <td>{{ biz.description }}</td>
+            <td>
+                <form action="{{ url_for('delete_business', business_id=biz.id) }}" method="post" style="display:inline-block;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
